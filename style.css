@@ -35,6 +35,15 @@ body{
     padding: 10px;
 }
 
+.footer{
+    display: flex;
+    font-size: 10px;
+    gap: 13px;
+}
+
+.footer a{
+    color: grey;
+}
 
 
 
