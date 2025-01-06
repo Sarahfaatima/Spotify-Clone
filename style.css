@@ -67,6 +67,10 @@ body{
     color: grey;
 }
 
+.header{
+    display: flex;
+}
+
 
 
 
