@@ -81,12 +81,71 @@ body{
     padding: 16px;
 }
 
-.spotifyPlaylists img{
-    /* border-radius: 10px; */
+.cardContainer{
+    margin: 30px;
+    display: flex;
+    gap:20px;
+    flex-wrap: wrap;
+}
+
+.spotifyPlaylists .card{
+    width:170px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #252525;
+    position: relative;
+}
+
+.card > *{
+    padding-top: 10px;
+    position: relative;
+}
+
+.play-button-container {
+    background-color: green;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: absolute;
+    top: 190px;
+    left: 100px;
+} 
+
+.play-button {
+    width: 50%;
+    height: 50%;
+    object-fit: contain;
+    
+}
+
+.card img{
+    width: 100%;
+    object-fit: contain;
+}
+
+/* .play{
+    width: 28px;
+    height: 28px;
+    background-color: green;
+    border-radius: 50%;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top:168px;
+    right: 17px;
+} */
+
+
+/* .spotifyPlaylists img{
     margin-top: 40px;;
     max-height: 170px;
 
-}
+} */
 
 
 
