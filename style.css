@@ -20,6 +20,8 @@ body{
 
 .right{
     width: 95vw;
+    max-height: 100vh;
+    overflow: scroll;
 }
 
 .home{
@@ -61,6 +63,7 @@ body{
     gap: 13px;
     position: absolute;
     bottom: 0;
+    padding: 10px;
 }
 
 .footer a{
@@ -113,7 +116,15 @@ body{
     top: 136px;
     left: 110px;
     z-index: 1;
+    opacity: 1;
+    transition: all 1s ease-out;
 } 
+
+.play-button-container:hover {
+    background-color: #0d8b3a; /* Changes background to a darker green on hover */
+    transform: scale(1.2);    /* Enlarges the button on hover */
+    opacity: 0.9;
+}
 
 .play-button {
     width: 50%;
