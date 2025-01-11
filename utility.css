@@ -43,7 +43,7 @@
   padding: 10px;
 }
 
-/* For webkit browsers like Chrome, Safari */
+/* For playlist scrollbar width */
 ::-webkit-scrollbar {
   width: 12px;
 }

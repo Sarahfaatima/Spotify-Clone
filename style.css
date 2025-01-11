@@ -20,6 +20,7 @@ body{
 
 .right{
     width: 95vw;
+    position: relative;
     
 }
 
@@ -88,8 +89,9 @@ body{
     display: flex;
     gap:20px;
     flex-wrap: wrap;
-    max-height: 70vh;
+    /* max-height: 70vh; */
     overflow: scroll;
+    max-height: 70vh
 }
 
 .spotifyPlaylists .card{
@@ -180,6 +182,22 @@ body{
     font-size: 17px;
 }
 
+.playbar{
+    position: absolute;
+    bottom: 0;
+    background-color: rgb(139, 193, 139);
+    width: 100%;
+    padding: 12px;
+}
 
+.songbuttons{
+    display: flex;
+    justify-content: center;
+    gap: 13px;
+    /* width: 5px; */
+    height: 35px;
+    margin-top: 7px;
+    cursor: pointer;
+}
 
 
