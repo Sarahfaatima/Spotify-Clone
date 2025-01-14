@@ -21,10 +21,12 @@ let song = Array.from(anchors).map(anchor =>
 console.log(song);
 
    
+return song
 
   } catch (error) {
     console.error("Error fetching songs:", error);
   }
+  
 }
 
 // Call the function on page load
@@ -32,37 +34,20 @@ document.addEventListener("DOMContentLoaded", () => {
   getSongs();
 });
 
-async function main() {
-    try {
-        // Fetch the list of all songs
-        let songs = await getSongs();
-        console.log("Songs fetched:", songs);
 
-        // Ensure the songs array is not empty
-        if (!songs || songs.length === 0) {
-            console.error("No songs found to play.");
-            return;
-        }
+async function main(){
+    //Get the list of all the songs
+    let songs =  await getSongs()
+    console.log(songs)
 
-        // Validate the first song URL
-        const firstSong = songs[0];
-        if (!firstSong.startsWith("http")) {
-            console.error("Invalid song URL:", firstSong);
-            return;
-        }
+    //play the first song
+    var audio = new Audio(songs[0]);
+audio.play();
 
-        // Play the first song
-        let audio = new Audio(firstSong);
-        audio.play()
-            .then(() => {
-                console.log("Playing:", firstSong);
-            })
-            .catch((error) => {
-                console.error("Error playing audio:", error);
-            });
-    } catch (error) {
-        console.error("Error in main function:", error);
-    }
 }
 
+main()
+{
+    
+}
 
