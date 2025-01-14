@@ -185,8 +185,8 @@ body{
 .playbar{
     position: absolute;
     bottom: 0;
-    background-color: rgb(139, 193, 139);
-    width: 100%;
+    background-color: rgb(255, 255, 255);
+    width: 91%;
     padding: 12px;
 }
 
@@ -200,4 +200,11 @@ body{
     cursor: pointer;
 }
 
+.songList ul{
+    padding: 0 42px;
+}
+
+.songList ul li{
+    list-style-type: decimal;
+}
 
