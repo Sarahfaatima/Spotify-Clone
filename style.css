@@ -207,5 +207,29 @@ body{
 .songList ul li{
     list-style-type: decimal;
     display: flex;
+    gap: 35px;
+    cursor: pointer;
+    padding: 12px 0;
+    border: 1px solid white;
+    margin: 12px;
+    padding:13px;
+    border-radius: 5px;
 }
 
+
+/* .playnow{
+    display: flex;
+} */
+
+.songList > *{
+    width: 500px;
+    /* gap: 90px; */
+}
+
+.playnow {
+    /* margin-top: 9px;; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
