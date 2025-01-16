@@ -206,5 +206,6 @@ body{
 
 .songList ul li{
     list-style-type: decimal;
+    display: flex;
 }
 
