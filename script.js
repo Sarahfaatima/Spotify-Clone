@@ -56,9 +56,20 @@ audio.addEventListener("loadeddata", () => {
   // The duration variable now holds the duration (in seconds) of the audio clip
 });
 
+ //play the second song
+var audio = new Audio(songs[1]);
+audio.play();
+
+
+audio.addEventListener("loadeddata", () => {
+  let duration = audio.duration;
+  console.log(duration)
+   // The duration variable now holds the duration (in seconds) of the audio clip
+});
+
 }
 
 main()
 {
-
+  
 }
