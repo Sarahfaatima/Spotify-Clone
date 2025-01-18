@@ -71,5 +71,5 @@ audio.addEventListener("loadeddata", () => {
 
 main()
 {
-  
-}
+
+} 
