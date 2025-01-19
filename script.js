@@ -3,11 +3,13 @@ console.log('Lets write JavaScript');
 async function getSongs() {
   try {
 
-    let a = await fetch("http://127.0.0.1:5500/song/");
-let response = await a.text();
+    let a = await fetch("http://127.0.0.1:5500/song/");  //it fetches the song 
+let response = await a.text();  //it converts the data present in 'a' into text and store it into response
 
 // Parse the response into a DOM object
-let parser = new DOMParser();
+let parser = new DOMParser();   
+// with the help of parser variable/instance of DOM parser class we convert HTML string into DOM.
+// i.e., we are converting html string in DOM
 let doc = parser.parseFromString(response, "text/html");
 
 // Select all anchor tags (<a>) that have an href starting with "/song/"
@@ -20,7 +22,7 @@ let song = Array.from(anchors).map(anchor =>
 
 console.log(song);
 
-   
+
 return song
 
   } catch (error) {
@@ -35,15 +37,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-async function main(){
-    //Get the list of all the songs
-    let songs =  await getSongs()
-    console.log(songs)
+async function main() {
+  // Get the list of all the songs
+  let songs = await getSongs();
+  console.log(songs);
 
-    let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
-    for(const song of songs){
-        songUL.innerHTML = songUL.innerHTML + '<li> ${song.replaceAll("%20")} </li>'
-    }
+  // Get the unordered list element
+  let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
+  console.log(songUL);
+
+  for (const song of songs) {
+      console.log(song);
+
+      // Extract the song name from the URL
+      const songName = decodeURIComponent(song.split('/').pop()).replace(/-/g, ' ');
+
+      // Add the song name as a list item
+      songUL.innerHTML += `<li>${songName}</li>`;
+  }
+
+
 
     //play the first song
     var audio = new Audio(songs[0]);
