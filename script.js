@@ -75,7 +75,7 @@ async function main() {
 
     //play the first song
     var audio = new Audio(songs[0]);
-// audio.play(); 
+audio.play(); 
 
 
 audio.addEventListener("loadeddata", () => {
@@ -86,7 +86,7 @@ audio.addEventListener("loadeddata", () => {
 
  //play the second song
 var audio = new Audio(songs[1]);
-// audio.play();
+audio.play(); 
 
 
 audio.addEventListener("loadeddata", () => {
@@ -98,7 +98,7 @@ audio.addEventListener("loadeddata", () => {
 
 //play the third song
 var audio = new Audio(songs[2]);
-audio.play();
+audio.play();  
 
 
 audio.addEventListener("loadeddata", () => {
