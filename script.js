@@ -53,14 +53,29 @@ async function main() {
       const songName = decodeURIComponent(song.split('/').pop()).replace(/-/g, ' ');
 
       // Add the song name as a list item
-      songUL.innerHTML += `<li>${songName}</li>`;
+      songUL.innerHTML += `<li><img class="invert" src="assets/music.svg" alt="">
+                            <div class="info">
+                                <div>${songName}</div>
+                                <div>Sarah</div>
+                            </div>
+                            
+                            <div class="playnow">
+                                <span>Play Now</span>
+                                <img class="invert" src="assets/playnow.svg" alt="">
+                            </div>
+                            
+                        </li>
+      
+      
+      
+      </li>`;
   }
 
 
 
     //play the first song
     var audio = new Audio(songs[0]);
-audio.play(); 
+// audio.play(); 
 
 
 audio.addEventListener("loadeddata", () => {
@@ -72,6 +87,18 @@ audio.addEventListener("loadeddata", () => {
  //play the second song
 var audio = new Audio(songs[1]);
 // audio.play();
+
+
+audio.addEventListener("loadeddata", () => {
+  let duration = audio.duration;
+  console.log(duration)
+   // The duration variable now holds the duration (in seconds) of the audio clip
+});
+
+
+//play the third song
+var audio = new Audio(songs[2]);
+audio.play();
 
 
 audio.addEventListener("loadeddata", () => {

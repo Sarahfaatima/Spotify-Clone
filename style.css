@@ -200,9 +200,20 @@ body{
     cursor: pointer;
 }
 
+/* .songList{
+    border: 1px solid white;
+} */
+
+
+
 .songList ul{
     padding: 0 42px;
+    
 }
+
+/* .songList li{
+    border: 1px solid white;
+} */
 
 .songList ul li{
     list-style-type: decimal;
