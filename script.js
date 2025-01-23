@@ -119,6 +119,18 @@ audio.addEventListener("loadeddata", () => {
 });
 
 
+//play the fifth song
+var audio = new Audio(songs[4]);
+audio.play();  
+
+
+audio.addEventListener("loadeddata", () => {
+  let duration = audio.duration;
+  console.log(duration)
+   // The duration variable now holds the duration (in seconds) of the audio clip
+});
+
+
 }
 
 main()
