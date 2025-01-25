@@ -183,11 +183,13 @@ body{
 }
 
 .playbar{
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    /* position: absolute; */
+    bottom: 30px;
     background-color: rgb(255, 255, 255);
     width: 91%;
     padding: 12px;
+    width: 70vw;
 }
 
 .songbuttons{
