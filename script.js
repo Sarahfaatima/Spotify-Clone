@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 async function main() {
   // Get the list of all the songs
   let songs = await getSongs();
-  console.log(songs); 
+  // console.log(songs); 
 
   // Get the unordered list element
   let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
@@ -62,13 +62,7 @@ async function main() {
                             <div class="playnow">
                                 <span>Play Now</span>
                                 <img class="invert" src="assets/playnow.svg" alt="">
-                            </div>
-                            
-                        </li>
-      
-      
-      
-      </li>`;
+                            </div></li>`;
   }
 
 
