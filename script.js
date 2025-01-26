@@ -66,6 +66,10 @@ async function main() {
   }
 
 
+  //Attach an event listener to each song
+  Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
+    console.log(e)
+  })
 
     //play the first song
     var audio = new Audio(songs[0]);
@@ -77,53 +81,6 @@ audio.addEventListener("loadeddata", () => {
   console.log(duration) 
   // The duration variable now holds the duration (in seconds) of the audio clip
 });
-
- //play the second song
-var audio = new Audio(songs[1]);
-audio.play(); 
-
-
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration)
-   // The duration variable now holds the duration (in seconds) of the audio clip
-});
-
-
-//play the third song
-var audio = new Audio(songs[2]);
-audio.play();  
-
-
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration)
-   // The duration variable now holds the duration (in seconds) of the audio clip
-});
-
-//play the fourth song
-var audio = new Audio(songs[3]);
-audio.play();  
-
-
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration)
-   // The duration variable now holds the duration (in seconds) of the audio clip
-});
-
-
-//play the fifth song
-var audio = new Audio(songs[4]);
-audio.play();  
-
-
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration)
-   // The duration variable now holds the duration (in seconds) of the audio clip
-});
-
 
 }
 
