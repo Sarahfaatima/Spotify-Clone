@@ -46,7 +46,7 @@ const playMusic = (track)=>{
 async function main() {
   
   // Get the list of all the songs
-  let songs = await getSongs();
+  let songs = await getSongs(); 
   // console.log(songs); 
 
   // Get the unordered list element
@@ -95,39 +95,39 @@ async function main() {
     }
   })
 
-    //play the first song
-    var audio = new Audio(songs[0]);
-audio.play(); 
+//     //play the first song
+//     var audio = new Audio(songs[0]);
+// audio.play(); 
 
 
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration) 
-  // The duration variable now holds the duration (in seconds) of the audio clip
-});
+// audio.addEventListener("loadeddata", () => {
+//   let duration = audio.duration;
+//   console.log(duration) 
+//   // The duration variable now holds the duration (in seconds) of the audio clip
+// });
 
 
-//play the second song
-var audio = new Audio(songs[1]);
-audio.play(); 
+// //play the second song
+// var audio = new Audio(songs[1]);
+// audio.play(); 
 
 
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration) 
-  // The duration variable now holds the duration (in seconds) of the audio clip
-});
+// audio.addEventListener("loadeddata", () => {
+//   let duration = audio.duration;
+//   console.log(duration) 
+//   // The duration variable now holds the duration (in seconds) of the audio clip
+// });
 
-//play the third song
-var audio = new Audio(songs[2]);
-audio.play(); 
+// //play the third song
+// var audio = new Audio(songs[2]);
+// audio.play(); 
 
 
-audio.addEventListener("loadeddata", () => {
-  let duration = audio.duration;
-  console.log(duration) 
-  // The duration variable now holds the duration (in seconds) of the audio clip
-});
+// audio.addEventListener("loadeddata", () => {
+//   let duration = audio.duration;
+//   console.log(duration) 
+//   // The duration variable now holds the duration (in seconds) of the audio clip
+// });
 
 
 }
