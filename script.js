@@ -39,8 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const playMusic = (track)=>{
     // let audio = new Audio("/songs/" + track)
-    let audio = new Audio("/songs/" + track)
-    audio.play()
+    currentSong.src = "/songs/" + track
+    currentSong.play()
 }
 
 async function main() {
