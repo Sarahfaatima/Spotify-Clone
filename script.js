@@ -21,10 +21,10 @@ let song = Array.from(anchors).map(anchor =>
   `http://127.0.0.1:5500${anchor.getAttribute("href")}`
 );
 
-console.log(song);
+console.log(songs);
 
 
-return song
+return songs;
 
   } catch (error) {
     console.error("Error fetching songs:", error);
@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
   getSongs();
 });
 
-const playMusic = (track)=>{
+const playMusic = (/127.0.0.1:5500/song/) => {
     // let audio = new Audio("/songs/" + track)
-    currentSong.src = "/songs/" + track
+    currentSong.src = "http://127.0.0.1:5500/song/" 
     currentSong.play()
 }
 
@@ -50,18 +50,19 @@ async function main() {
   // console.log(songs); 
 
   // Get the unordered list element
-  let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0];
-  console.log(songUL);
+  let songUL = document.querySelector(".songList ul");
+  console.log(songUL)
 
   for (const song of songs) {
-      console.log(song);
+      console.log(song)
 
       // Extract the song name from the URL
       const songName = decodeURIComponent(song.split('/').pop()).replace(/-/g, ' ');
 
       // Add the song name as a list item
-      songUL.innerHTML += `<li><img class="invert" src="assets/music.svg" alt="">
-                            <div class="info">
+      songUL.innerHTML += `<li data-src="${song}">
+                              <img class="invert" src="assets/music.svg" alt="">
+                              <div class="info">
                                 <div>${songName}</div>
                                 <div>Sarah</div>
                             </div>
@@ -74,26 +75,31 @@ async function main() {
 
 
   //Attach an event listener to each song
-  Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e=>{
-    e.addEventListener("click",element=>{
-      console.log(e.querySelector(".info").firstElementChild.innerHTML)
-      playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+  document.querySelectorAll(".songList li").forEach(li=>{
+    li.addEventListener("click",() =>{
+      let songUrl = li.getAttribute("data-src");  // Get the full song URL
+      playMusic(/127.0.0.1:5500/song/);
 
-    })
+    });
     
-  })
+  });
+
+  // return songs
+
 
   //Attach an event listener to play, next and previous
-  play.addEventListener("click", ()=>{
-    if(currentSong.paused){
+    document.getElementById("play").addEventListener("click", () => {
+    if (currentSong.paused) {
       currentSong.play()
-      play.src = "pause.svg"
+      document.getElementById("play").src = "assets/pause.svg";
     }
     else{
+      
       currentSong.pause()
-      play.src = "play.svg"
+      document.getElementById("play").src = "assets/play.svg";
     }
-  })
+  });
+}
 
 //     //play the first song
 //     var audio = new Audio(songs[0]);
@@ -130,6 +136,6 @@ async function main() {
 // });
 
 
-}
 
-main()
+
+main();
