@@ -21,10 +21,10 @@ let song = Array.from(anchors).map(anchor =>
   `http://127.0.0.1:5500${anchor.getAttribute("href")}`
 );
 
-console.log(songs);
+console.log(song);
 
 
-return songs;
+return song;
 
   } catch (error) {
     console.error("Error fetching songs:", error);
@@ -37,9 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
   getSongs();
 });
 
-const playMusic = (/127.0.0.1:5500/song/) => {
+const playMusic = (track) => {
     // let audio = new Audio("/songs/" + track)
-    currentSong.src = "http://127.0.0.1:5500/song/" 
+    currentSong.src = "/songs/" + track
     currentSong.play()
 }
 
@@ -50,8 +50,8 @@ async function main() {
   // console.log(songs); 
 
   // Get the unordered list element
-  let songUL = document.querySelector(".songList ul");
-  console.log(songUL)
+  let songUL = document.querySelector(".songList").getElementsByTagName("ul")[0]
+  songUL.innerHTML = ""
 
   for (const song of songs) {
       console.log(song)
@@ -60,25 +60,22 @@ async function main() {
       const songName = decodeURIComponent(song.split('/').pop()).replace(/-/g, ' ');
 
       // Add the song name as a list item
-      songUL.innerHTML += `<li data-src="${song}">
-                              <img class="invert" src="assets/music.svg" alt="">
-                              <div class="info">
-                                <div>${songName}</div>
+      songUL.innerHTML = songUL.innerHTML + `<li><img class="invert" width="34" src="img/music.svg" alt="">
+                            <div class="info">
+                                <div> ${song.replaceAll("%20", " ")}</div>
                                 <div>Sarah</div>
                             </div>
-                            
                             <div class="playnow">
                                 <span>Play Now</span>
-                                <img class="invert" src="assets/playnow.svg" alt="">
-                            </div></li>`;
-  }
+                                <img class="invert" src="img/play.svg" alt="">
+                            </div> </li>`;
+        }
 
 
   //Attach an event listener to each song
-  document.querySelectorAll(".songList li").forEach(li=>{
-    li.addEventListener("click",() =>{
-      let songUrl = li.getAttribute("data-src");  // Get the full song URL
-      playMusic(/127.0.0.1:5500/song/);
+  Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
+    e.addEventListener("click", element => {
+        playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
 
     });
     
@@ -88,17 +85,17 @@ async function main() {
 
 
   //Attach an event listener to play, next and previous
-    document.getElementById("play").addEventListener("click", () => {
+  play.addEventListener("click", () => {
     if (currentSong.paused) {
-      currentSong.play()
-      document.getElementById("play").src = "assets/pause.svg";
+        currentSong.play()
+        play.src = "img/pause.svg"
     }
-    else{
-      
-      currentSong.pause()
-      document.getElementById("play").src = "assets/play.svg";
+    else {
+        currentSong.pause()
+        play.src = "img/play.svg"
     }
-  });
+})
+
 }
 
 //     //play the first song
