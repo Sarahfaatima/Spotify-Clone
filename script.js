@@ -62,7 +62,7 @@ async function main() {
       // Add the song name as a list item
       songUL.innerHTML = songUL.innerHTML + `<li><img class="invert" width="34" src="img/music.svg" alt="">
                             <div class="info">
-                                <div> ${song.replaceAll("%20", " ")}</div>
+                                <div> ${songName.replaceAll("%20", " ")}</div>
                                 <div>Sarah</div>
                             </div>
                             <div class="playnow">
@@ -74,10 +74,11 @@ async function main() {
 
   //Attach an event listener to each song
   Array.from(document.querySelector(".songList").getElementsByTagName("li")).forEach(e => {
-    e.addEventListener("click", element => {
-        playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
+    console.log(e.target)
+    // e.addEventListener("click", element => {
+    //     playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
 
-    });
+    // });
     
   });
 
