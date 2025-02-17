@@ -36,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 const playMusic = (track) => {
   let audio = new Audio("/song/" + track);
   audio.play();
+  play.src = "pause.svg"
+  document.querySelector(".songinfo")
   // currentSong.src = "/song/" + track
   // currentSong.play()
 };
@@ -89,10 +91,10 @@ async function main() {
   play.addEventListener("click", () => {
     if (currentSong.paused) {
       currentSong.play();
-      play.src = "img/pause.svg";
+      play.src = "pause.svg";
     } else {
       currentSong.pause();
-      play.src = "img/play.svg";
+      play.src = "play.svg";
     }
   });
 }
