@@ -34,12 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const playMusic = (track) => {
-  let audio = new Audio("/song/" + track);
-  audio.play();
-  play.src = "pause.svg"
-  document.querySelector(".songinfo")
-  // currentSong.src = "/song/" + track
-  // currentSong.play()
+  // let audio = new Audio("/song/" + track);
+  // audio.play();
+  // play.src = "pause.svg"
+  // document.querySelector(".songinfo")
+  currentSong.src = "/song/" + track
+  currentSong.play()
+  play.src = "assets/pause.svg"
 };
 
 async function main() {
@@ -90,11 +91,11 @@ async function main() {
   //Attach an event listener to play, next and previous
   play.addEventListener("click", () => {
     if (currentSong.paused) {
-      currentSong.play();
-      play.src = "pause.svg";
+      currentSong.play()
+      play.src = "assets/pause.svg"
     } else {
       currentSong.pause();
-      play.src = "play.svg";
+      play.src = "assets/musicbutton.svg"
     }
   });
 }
@@ -129,4 +130,4 @@ async function main() {
 //   // The duration variable now holds the duration (in seconds) of the audio clip
 // });
 
-main();
+main()
