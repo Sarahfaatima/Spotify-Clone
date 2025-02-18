@@ -96,6 +96,8 @@ async function main() {
     } else {
       currentSong.pause();
       play.src = "assets/musicbutton.svg"
+      document.querySelector(".songinfo").innerHTML = ""
+      document.querySelector(".songtime").innerHTML = "00:00 / 03:00"
     }
   });
 }
