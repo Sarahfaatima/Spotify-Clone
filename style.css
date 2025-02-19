@@ -258,13 +258,14 @@ body{
 }
 
 .seekbar{
-    height: 2px;
+    height: 4px;
     width: 95%;
     background: black;
     border-radius: 10px;
     position: absolute;
     bottom: 0;
-    margin: 6px;;
+    margin: 6px;
+    cursor: pointer;
 }
 
 .circle{
@@ -285,5 +286,7 @@ body{
 
 .songinfo, .songtime{
     color: black;
+    padding: 0 12px;
 }
+
 
