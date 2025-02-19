@@ -1,6 +1,21 @@
 // console.log('Lets write JavaScript');
 let currentSong = new Audio();
 
+function secondsToMinutesSeconds(seconds) {
+  if (isNaN(seconds) || seconds < 0) {
+      return "00:00";
+  }
+
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+
+  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+
+  return `${formattedMinutes}:${formattedSeconds}`;
+}
+
+
 async function getSongs() {
   try {
     let a = await fetch("http://127.0.0.1:5500/song/"); //it fetches the song
@@ -33,26 +48,28 @@ document.addEventListener("DOMContentLoaded", () => {
   getSongs();
 });
 
-const playMusic = (track) => {
-  // let audio = new Audio("/song/" + track);
-  // audio.play();
-  // play.src = "pause.svg"
-  // document.querySelector(".songinfo")
+const playMusic = (track, pause=false) => {
   currentSong.src = "/song/" + track
-  currentSong.play()
+  if(!pause){
+    currentSong.play()
+  }
+  
   play.src = "assets/pause.svg"
+  document.querySelector(".songinfo").innerHTML = decodeURI(track) 
+  document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
 };
 
 async function main() {
   // Get the list of all the songs
   let songs = await getSongs();
+  playMusic(songs[0], true)
   // console.log(songs);
 
   // Get the unordered list element
   let songUL = document
     .querySelector(".songList")
     .getElementsByTagName("ul")[0];
-  songUL.innerHTML = "";
+  songUL.innerHTML = ""
 
   for (const song of songs) {
     // console.log(song)
@@ -63,14 +80,14 @@ async function main() {
     // Add the song name as a list item
     songUL.innerHTML =
       songUL.innerHTML +
-      `<li><img class="invert" width="34" src="img/music.svg" alt="">
+      `<li><img class="invert" width="34" src="assets/music.svg" alt="">
                             <div class="info">
                                 <div> ${songName.replaceAll("%20", " ")}</div>
                                 <div>Sarah</div>
                             </div>
                             <div class="playnow">
                                 <span>Play Now</span>
-                                <img class="invert" src="img/play.svg" alt="">
+                                <img class="invert" src="assets/play button.svg" alt="">
                             </div> </li>`;
   }
 
@@ -96,10 +113,15 @@ async function main() {
     } else {
       currentSong.pause();
       play.src = "assets/musicbutton.svg"
-      document.querySelector(".songinfo").innerHTML = ""
-      document.querySelector(".songtime").innerHTML = "00:00 / 03:00"
+      
     }
   });
+
+  // Listen for timeupdate event
+  currentSong.addEventListener("timeupdate", ()=>{
+    console.log(currentSong.currentTime, currentSong.duration)
+    document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)}/${secondsToMinutesSeconds(currentSong.duration)}`
+  })
 }
 
 //     //play the first song
