@@ -130,36 +130,12 @@ async function main() {
     document.querySelector(".circle").style.left = percent + "%";
     currentSong.currentTime = ((currentSong.duration)* percent)/100  
   })
+
+   // Add an event listener for hamburger
+  document.querySelector(".hamburger").addEventListener("click", () => {
+    document.querySelector(".left").style.left = "0"
+})
+
 }
-
-//     //play the first song
-//     var audio = new Audio(songs[0]);
-// audio.play();
-
-// audio.addEventListener("loadeddata", () => {
-//   let duration = audio.duration;
-//   console.log(duration)
-//   // The duration variable now holds the duration (in seconds) of the audio clip
-// });
-
-// //play the second song
-// var audio = new Audio(songs[1]);
-// audio.play();
-
-// audio.addEventListener("loadeddata", () => {
-//   let duration = audio.duration;
-//   console.log(duration)
-//   // The duration variable now holds the duration (in seconds) of the audio clip
-// });
-
-// //play the third song
-// var audio = new Audio(songs[2]);
-// audio.play();
-
-// audio.addEventListener("loadeddata", () => {
-//   let duration = audio.duration;
-//   console.log(duration)
-//   // The duration variable now holds the duration (in seconds) of the audio clip
-// });
 
 main()
