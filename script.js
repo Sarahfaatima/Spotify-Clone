@@ -149,7 +149,7 @@ async function main() {
   })
 
    // Add an event listener to previous 
-    next.addEventListener("click", ()=>{
+   next.addEventListener("click", ()=>{
     console.log("Next clicked")
   })
 
