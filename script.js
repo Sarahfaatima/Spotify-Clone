@@ -49,15 +49,15 @@ document.addEventListener("DOMContentLoaded", () => {
   getSongs();
 });
 
-const playMusic = (track, pause=false) => {
-  currentSong.src = "/song/" + track
+const playMusic = (track, pause = false) => {
+  currentSong.src = "/song/" + track;
   if(!pause){
     currentSong.play()
-    play.src = "assets/pause.svg"
+    play.src = "assets/pause.svg";
   }
   
-  document.querySelector(".songinfo").innerHTML = decodeURI (track.replaceAll("%20", " ").split("http://127.0.0.1:5500/song/")) 
-  document.querySelector(".songtime").innerHTML = "00:00 / 00:00"
+  document.querySelector(".songinfo").innerHTML =  decodeURI (track);
+  document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 };
 
 async function main() {
@@ -68,9 +68,9 @@ async function main() {
 
   // Get the unordered list element
   let songUL = document
-    .querySelector(".songList")
-    .getElementsByTagName("ul")[0];
-  songUL.innerHTML = ""
+    .querySelector(".songList ul")
+    // .getElementsByTagName("ul")[0];
+  songUL.innerHTML = "";
 
   for (const song of songs) {
     // console.log(song)
@@ -79,9 +79,9 @@ async function main() {
     const songName = decodeURIComponent(song.split("/").pop())
 
     // Add the song name as a list item
-    songUL.innerHTML =
-      songUL.innerHTML +
-      `<li><img class="invert" width="34" src="assets/music.svg" alt="">
+    songUL.innerHTML += 
+    `<li>
+      <img class="invert" width="34" src="assets/music.svg" alt="">
                             <div class="info">
                                 <div> ${songName.replaceAll("%20", " ")}</div>
                                 <div>Sarah</div>
@@ -90,7 +90,7 @@ async function main() {
                                 <span>Play Now</span>
                                 <img class="invert" src="assets/play button.svg" alt="">
                             </div> </li>`;
-  }
+  } 
 
   //Attach an event listener to each song
   Array.from(
@@ -103,6 +103,8 @@ async function main() {
       //     playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
     });
   });
+
+  
 
   // return songs
 
