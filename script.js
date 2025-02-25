@@ -50,15 +50,22 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const playMusic = (track, pause = false) => {
-  currentSong.src = "/song/" + track;
-  if(!pause){
-    currentSong.play()
+  // Check if track is already a full URL
+  if (!track.startsWith("http")) {
+    track = "/song/" + track;
+  }
+
+  currentSong.src = track;
+
+  if (!pause) {
+    currentSong.play().catch(error => console.error("Playback error:", error));
     play.src = "assets/pause.svg";
   }
-  
-  document.querySelector(".songinfo").innerHTML =  decodeURI (track);
+
+  document.querySelector(".songinfo").innerHTML = decodeURI(track.split("/").pop());
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 };
+
 
 async function main() {
   // Get the list of all the songs
@@ -146,27 +153,29 @@ async function main() {
 
 
  // Add an event listener to previous 
-  previous.addEventListener("click", ()=>{
-    console.log("Previous clicked")
-    console.log(currentSong)
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
-    if((index-1) >= 0){
-      playMusic(songs[index-1])
-    }
+  previous.addEventListener("click", () => {
+  console.log("Previous clicked");
 
-  })
+  let currentTrack = decodeURIComponent(currentSong.src.split("/").pop()); // Get only filename
+  let index = songs.findIndex(song => decodeURIComponent(song.split("/").pop()) === currentTrack);
 
-   // Add an event listener to next 
-  next.addEventListener("click", ()=>{
-    console.log("Next clicked")
+  if (index > 0) {
+    playMusic(songs[index - 1]); // Play the previous song
+  }
+});
 
-    let index = songs.indexOf(currentSong.src.split("/").slice(-1) [0])
-    if((index+1) > length){
-      playMusic(songs[index+1])
-    }
-  
-    
-  })
+next.addEventListener("click", () => {
+  console.log("Next clicked");
+
+  let currentTrack = decodeURIComponent(currentSong.src.split("/").pop()); // Get only filename
+  let index = songs.findIndex(song => decodeURIComponent(song.split("/").pop()) === currentTrack);
+
+  if (index < songs.length - 1) {
+    playMusic(songs[index + 1]); // Play the next song
+  }
+});
+
+
 
 
 
