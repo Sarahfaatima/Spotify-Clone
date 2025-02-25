@@ -257,6 +257,10 @@ body{
     width: 344px;
 }
 
+.info div{
+    word-break: break-all;
+}
+
 .songList > *{
     width: 320px;
     
@@ -298,15 +302,37 @@ body{
     transition: left 0.5s;
 }
 
+.timevol{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-direction: column;
+    gap: 13px;
+}
+
 .abovebar{
     display: flex;
     justify-content: space-between;
     margin: 20px 0;
 }
 
-.songinfo, .songtime{
+.songinfo{
     color: black;
     padding: 0 12px;
+    width: 250px;
+}
+
+.songtime{
+    width: 125px;
+    color: black;
+    padding: 0 12px;    
+}
+
+.volume{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 @media (max-width: 1400px){
@@ -317,6 +343,11 @@ body{
         z-index: 1;
         width: 373px;
         background-color: black;
+        padding: 0;
+    }
+
+    .songinfo, .songtime{
+        width: auto;
     }
 
     .left .close{
