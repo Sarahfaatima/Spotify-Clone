@@ -1,6 +1,7 @@
 // console.log('Lets write JavaScript');
 let currentSong = new Audio();
 let songs;
+let currFolder;
 
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
@@ -17,9 +18,11 @@ function secondsToMinutesSeconds(seconds) {
 }
 
 
-async function getSongs() {
+async function getSongs(folder) {
+  
   try {
-    let a = await fetch("http://127.0.0.1:5500/song/"); //it fetches the song
+    let a = await fetch(`http://127.0.0.1:5500/${folder}/`); //it fetches the song
+    console.log(`http://127.0.0.1:5500/${folder}/`)
     let response = await a.text(); //it converts the data present in 'a' into text and store it into response
 
     // Parse the response into a DOM object
@@ -27,9 +30,12 @@ async function getSongs() {
     // with the help of parser variable/instance of DOM parser class we convert HTML string into DOM.
     // i.e., we are converting html string in DOM
     let doc = parser.parseFromString(response, "text/html");
+    console.log(doc)
 
-    // Select all anchor tags (<a>) that have an href starting with "/song/"
-    let anchors = doc.querySelectorAll('a[href^="/song/"]');
+    // Select all anchor tags (<a>) that have an href starting with "/song/ncs"
+    let anchors = doc.querySelectorAll(`a[href^="/${folder}"]`);
+
+    console.log(anchors)
 
     // Extract the full URLs and store them in the song array
     let song = Array.from(anchors).map(
@@ -37,6 +43,8 @@ async function getSongs() {
     );
 
     // console.log(song);
+    currFolder = folder;
+  console.log(currFolder)
 
     return song;
   } catch (error) {
@@ -50,9 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const playMusic = (track, pause = false) => {
+  console.log(track)
   // Check if track is already a full URL
   if (!track.startsWith("http")) {
-    track = "/song/" + track;
+    track = `/${currFolder}/` + track;
+    console.log(track)
+
   }
 
   currentSong.src = track;
@@ -69,9 +80,9 @@ const playMusic = (track, pause = false) => {
 
 async function main() {
   // Get the list of all the songs
-  songs = await getSongs();
+  songs = await getSongs("song/ncs");
   playMusic(songs[0], true)
-  // console.log(songs);
+  console.log(songs);
 
   // Get the unordered list element
   let songUL = document
@@ -91,7 +102,7 @@ async function main() {
       <img class="invert" width="34" src="assets/music.svg" alt="">
                             <div class="info">
                                 <div> ${songName.replaceAll("%20", " ")}</div>
-                                <div>Sarah</div>
+                                <div>Pakku</div>
                             </div>
                             <div class="playnow">
                                 <span>Play Now</span>
