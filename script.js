@@ -44,12 +44,14 @@ async function getSongs(folder) {
 
     // console.log(song);
     currFolder = folder;
-  console.log(currFolder)
+    console.log(currFolder)
+
+
 
     return song;
   } catch (error) {
     console.error("Error fetching songs:", error);
-  }
+  }  
 }
 
 // Call the function on page load
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const playMusic = (track, pause = false) => {
-  console.log(track)
+  // console.log(track)
   // Check if track is already a full URL
   if (!track.startsWith("http")) {
     track = `/${currFolder}/` + track;
@@ -80,9 +82,11 @@ const playMusic = (track, pause = false) => {
 
 async function main() {
   // Get the list of all the songs
-  songs = await getSongs("song/ncs");
+  songs = await getSongs("song/cs");
   playMusic(songs[0], true)
   console.log(songs);
+
+  
 
   // Get the unordered list element
   let songUL = document
@@ -123,8 +127,6 @@ async function main() {
   });
 
   
-
-  // return songs
 
   //Attach an event listener to play, next and previous
   play.addEventListener("click", () => {
@@ -190,9 +192,17 @@ next.addEventListener("click", () => {
 document.querySelector(".range").getElementsByTagName("input")[0].addEventListener("change", (e) => {
   console.log("Setting volume to", e.target.value, "/ 100")
   currentSong.volume = parseInt(e.target.value) / 100
-  if (currentSong.volume >0){
-      document.querySelector(".volume>img").src = document.querySelector(".volume>img").src.replace("mute.svg", "volume.svg")
-  }
+  // if (currentSong.volume >0){
+  //     document.querySelector(".volume>img").src = document.querySelector(".volume>img").src.replace("assets/mute.svg", "assets/volume.svg")
+  // }
+})
+
+//Load the playlist whenever card is clicked 
+Array.from(document.getElementsByClassName("card")).forEach(e=>{
+  console.log(e)
+  e.addEventListener("click", async items=>{
+    songs = await getSongs(`song/${items.currentTarget.dataset.folder}`)
+  })
 })
 
 
