@@ -19,40 +19,69 @@ function secondsToMinutesSeconds(seconds) {
 
 
 async function getSongs(folder) {
-  
+  currFolder = folder;
   try {
-    let a = await fetch(`http://127.0.0.1:5500/${folder}/`); //it fetches the song
-    console.log(`http://127.0.0.1:5500/${folder}/`)
-    let response = await a.text(); //it converts the data present in 'a' into text and store it into response
+    // Fetch the folder content (HTML)
+    let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
+    console.log(`http://127.0.0.1:5500/${folder}/`);
+    let response = await a.text();
 
     // Parse the response into a DOM object
     let parser = new DOMParser();
-    // with the help of parser variable/instance of DOM parser class we convert HTML string into DOM.
-    // i.e., we are converting html string in DOM
     let doc = parser.parseFromString(response, "text/html");
-    console.log(doc)
+    console.log(doc);
 
-    // Select all anchor tags (<a>) that have an href starting with "/song/ncs"
+    // Select all <a> tags whose href starts with "/{folder}"
     let anchors = doc.querySelectorAll(`a[href^="/${folder}"]`);
+    console.log(anchors);
 
-    console.log(anchors)
-
-    // Extract the full URLs and store them in the song array
-    let song = Array.from(anchors).map(
+    // Build an array of full song URLs
+    let songs = Array.from(anchors).map(
       (anchor) => `http://127.0.0.1:5500${anchor.getAttribute("href")}`
     );
+    console.log(songs);
+    // console.log(currFolder);
 
-    // console.log(song);
-    currFolder = folder;
-    console.log(currFolder)
+    // --- DOM Manipulation: Update the Song List ---
+    let songUL = document.querySelector(".songList ul");
+    songUL.innerHTML = ""; // Clear any previous list items
 
+    for (const song of songs) {
+      // Extract the song name from the URL (filename only)
+      const songName = decodeURIComponent(song.split("/").pop());
 
+      // Append a new <li> to the song list
+      songUL.innerHTML += 
+        `<li>
+          <img class="invert" width="34" src="assets/music.svg" alt="">
+          <div class="info">
+              <div>${songName.replaceAll("%20", " ")}</div>
+              <div>Pakku</div>
+          </div>
+          <div class="playnow">
+              <span>Play Now</span>
+              <img class="invert" src="assets/play button.svg" alt="">
+          </div>
+        </li>`;
+    }
 
-    return song;
+    // Attach an event listener to each song list item
+    Array.from(songUL.getElementsByTagName("li")).forEach((e) => {
+      e.addEventListener("click", () => {
+        // Extract the song name from the clicked item and play it
+        let songName = e.querySelector(".info").firstElementChild.innerHTML.trim();
+        // console.log("Clicked song:", songName);
+        playMusic(songName);
+      });
+    });
+    // --- End DOM Manipulation ---
+
+    return songs;
   } catch (error) {
     console.error("Error fetching songs:", error);
-  }  
+  }
 }
+
 
 // Call the function on page load
 document.addEventListener("DOMContentLoaded", () => {
@@ -64,7 +93,7 @@ const playMusic = (track, pause = false) => {
   // Check if track is already a full URL
   if (!track.startsWith("http")) {
     track = `/${currFolder}/` + track;
-    console.log(track)
+    // console.log(track)
 
   }
 
@@ -84,47 +113,11 @@ async function main() {
   // Get the list of all the songs
   songs = await getSongs("song/cs");
   playMusic(songs[0], true)
-  console.log(songs);
+  // console.log(songs);
 
   
 
-  // Get the unordered list element
-  let songUL = document
-    .querySelector(".songList ul")
-    // .getElementsByTagName("ul")[0];
-  songUL.innerHTML = "";
-
-  for (const song of songs) {
-    // console.log(song)
-
-    // Extract the song name from the URL
-    const songName = decodeURIComponent(song.split("/").pop())
-
-    // Add the song name as a list item
-    songUL.innerHTML += 
-    `<li>
-      <img class="invert" width="34" src="assets/music.svg" alt="">
-                            <div class="info">
-                                <div> ${songName.replaceAll("%20", " ")}</div>
-                                <div>Pakku</div>
-                            </div>
-                            <div class="playnow">
-                                <span>Play Now</span>
-                                <img class="invert" src="assets/play button.svg" alt="">
-                            </div> </li>`;
-  } 
-
-  //Attach an event listener to each song
-  Array.from(
-    document.querySelector(".songList").getElementsByTagName("li")
-  ).forEach((e) => {
-    e.addEventListener("click", (element) => {
-      console.log(e.querySelector(".info").firstElementChild.innerHTML);
-      playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim());
-      // e.addEventListener("click", element => {
-      //     playMusic(e.querySelector(".info").firstElementChild.innerHTML.trim())
-    });
-  });
+  
 
   
 
@@ -142,7 +135,7 @@ async function main() {
 
   // Listen for timeupdate event
   currentSong.addEventListener("timeupdate", ()=>{
-    console.log(currentSong.currentTime, currentSong.duration)
+    // console.log(currentSong.currentTime, currentSong.duration)
     document.querySelector(".songtime").innerHTML = `${secondsToMinutesSeconds(currentSong.currentTime)} / ${secondsToMinutesSeconds(currentSong.duration)}`
     document.querySelector(".circle").style.left = (currentSong.currentTime/ currentSong.duration) * 100 + "%";
   })
@@ -167,7 +160,7 @@ async function main() {
 
  // Add an event listener to previous 
   previous.addEventListener("click", () => {
-  console.log("Previous clicked");
+  // console.log("Previous clicked");
 
   let currentTrack = decodeURIComponent(currentSong.src.split("/").pop()); // Get only filename
   let index = songs.findIndex(song => decodeURIComponent(song.split("/").pop()) === currentTrack);
@@ -178,7 +171,7 @@ async function main() {
 });
 
 next.addEventListener("click", () => {
-  console.log("Next clicked");
+  // console.log("Next clicked");
 
   let currentTrack = decodeURIComponent(currentSong.src.split("/").pop()); // Get only filename
   let index = songs.findIndex(song => decodeURIComponent(song.split("/").pop()) === currentTrack);
@@ -199,7 +192,7 @@ document.querySelector(".range").getElementsByTagName("input")[0].addEventListen
 
 //Load the playlist whenever card is clicked 
 Array.from(document.getElementsByClassName("card")).forEach(e=>{
-  console.log(e)
+  // console.log(e)
   e.addEventListener("click", async items=>{
     songs = await getSongs(`song/${items.currentTarget.dataset.folder}`)
   })
