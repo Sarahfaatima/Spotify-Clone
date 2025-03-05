@@ -23,17 +23,16 @@ async function getSongs(folder) {
   try {
     // Fetch the folder content (HTML)
     let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
-    console.log(`http://127.0.0.1:5500/${folder}/`);
     let response = await a.text();
 
     // Parse the response into a DOM object
     let parser = new DOMParser();
     let doc = parser.parseFromString(response, "text/html");
-    console.log(doc);
+    // console.log(doc);
 
     // Select all <a> tags whose href starts with "/{folder}"
     let anchors = doc.querySelectorAll(`a[href^="/${folder}"]`);
-    console.log(anchors);
+    // console.log(anchors);
 
     // Build an array of full song URLs
     let songs = Array.from(anchors).map(
@@ -108,18 +107,24 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 };
 
+async function displayAlbums(){
+  let a = await fetch(`http://127.0.0.1:5500/song/`);
+  let response = await a.text();
+  let parser = new DOMParser();
+  let doc = parser.parseFromString(response, "text/html");
+  console.log(doc)
+
+}
 
 async function main() {
   // Get the list of all the songs
   songs = await getSongs("song/cs");
   playMusic(songs[0], true)
-  // console.log(songs);
 
-  
 
-  
+  //Display all the albums on the page
+  displayAlbums()
 
-  
 
   //Attach an event listener to play, next and previous
   play.addEventListener("click", () => {
