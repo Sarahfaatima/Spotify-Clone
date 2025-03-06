@@ -107,14 +107,13 @@ const playMusic = (track, pause = false) => {
   document.querySelector(".songtime").innerHTML = "00:00 / 00:00";
 };
 
-async function displayAlbums(){
-  let a = await fetch(`http://127.0.0.1:5500/song/`);
-  let response = await a.text();
-  let parser = new DOMParser();
-  let doc = parser.parseFromString(response, "text/html");
-  console.log(doc)
+  async function displayAlbums(folder){
+    let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
+    let response = await a.text();
+    let parser = new DOMParser();
+    let doc = parser.parseFromString(response, "text/html");
 
-}
+  }
 
 async function main() {
   // Get the list of all the songs
@@ -123,7 +122,7 @@ async function main() {
 
 
   //Display all the albums on the page
-  displayAlbums()
+  displayAlbums("song")
 
 
   //Attach an event listener to play, next and previous
