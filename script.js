@@ -135,7 +135,7 @@ async function main() {
       play.src = "assets/musicbutton.svg"
       
     }
-  });
+  })
 
   // Listen for timeupdate event
   currentSong.addEventListener("timeupdate", ()=>{
