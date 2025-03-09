@@ -1,7 +1,7 @@
 // console.log('Lets write JavaScript');
-let currentSong = new Audio();
-let songs;
-let currFolder;
+let currentSong = new Audio(); //audio object to manage audio playback
+let songs; // stores the list of song URLs fetched
+let currFolder; //track the current folder containing the songs
 
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
@@ -11,7 +11,7 @@ function secondsToMinutesSeconds(seconds) {
   const minutes = Math.floor(seconds / 60);
   const remainingSeconds = Math.floor(seconds % 60);
 
-  const formattedMinutes = String(minutes).padStart(2, '0');
+  const formattedMinutes = String(minutes).padStart(2, '0'); //ensures both minutes and seconds are always two digits.
   const formattedSeconds = String(remainingSeconds).padStart(2, '0');
 
   return `${formattedMinutes}:${formattedSeconds}`;
@@ -34,7 +34,7 @@ async function getSongs(folder) {
     let anchors = doc.querySelectorAll(`a[href^="/${folder}"]`);
     // console.log(anchors);
 
-    // Build an array of full song URLs
+    // Build an array of full song URLs for each song and adds them to the songs array.
     let songs = Array.from(anchors).map(
       (anchor) => `http://127.0.0.1:5500${anchor.getAttribute("href")}`
     );
@@ -118,7 +118,7 @@ const playMusic = (track, pause = false) => {
 async function main() {
   // Get the list of all the songs
   songs = await getSongs("song/cs");
-  playMusic(songs[0], true)
+  playMusic(songs[0], true) //loads the song without playing it
 
 
   //Display all the albums on the page
