@@ -203,6 +203,6 @@ Array.from(document.getElementsByClassName("card")).forEach(e=>{
 })
 
 
-};
+}
 
 main()
